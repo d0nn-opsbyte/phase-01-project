@@ -13,57 +13,27 @@
 </p>
 
 <form id="travelForm">
-<input
-type="text"
-value=""
-placeholder="Enter Destination"
-class="input-text"
-/><br>
+  <form id="bookingForm">
+    <input type="text" id="destination" placeholder="Enter destination" required>
 
-<input
-type="text"
-value=""
-placeholder="Check in Date"
-class="input-text"
-/><br>
+    <label>Check-in Date:</label>
+    <input type="date" id="checkIn" required>
 
-<input
-type="text"
-value=""
-placeholder="Check out Date"
-class="input-text"
-/><br>
+    <label>Check-out Date:</label>
+    <input type="date" id="checkOut" required>
 
+    <input type="number" id="adults" placeholder="Number of adult travellers" min="0" required>
+    <input type="number" id="children" placeholder="Number of child travellers" min="0" required>
+    <input type="text" id="hotel" placeholder="Enter hotel name" required>
 
-<input
-type="text"
-value=""
-placeholder="Enter number of adult travellers"
-class="input-number"
-min="1"
-/><br>
+    <label>
+      <input type="checkbox" id="meals"> Include Meals
+    </label>
 
-<input
-type="text"
-value=""
-placeholder="Enter number of chid travellers"
-class="input-number"
-min="0"
-/><br>
+    <button type="submit">Book Trip</button>
+  </form>
 
-
-<input
-type="text"
-value=""
-placeholder="Enter hotel"
-class="input-text"
-/><br>
-
-<label>
-    <input type="checbox" id="meals" placeholder="meals included">Include meals
-</label><br>
-
-<button type="submit">Book Trip</button>
+  <p id="pricePreview"><strong>Total Price:
 </form>
 
 <div id="booingForm">
