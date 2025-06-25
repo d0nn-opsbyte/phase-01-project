@@ -1,10 +1,12 @@
+window.addEventListener("DOMContentLoaded", loadBookings);
+
 document.getElementById("booingForm").addEventListener("submit", function(e){
     e.preventDefault();
     const destination = document.getElementById("destination").value;
-    const checkIn = document.getElementById("checkIn").value;
-    const checkOut = document.getElementById("checkOut").value;
-    const adults = document.getElementById("adults").value;
-    const children = document.getElementById("children").value;
+    const checkIn = newDate(document.getElementById("checkIn").value);
+    const checkOut = newDate(document.getElementById("checkOut").value);
+    const adults = parseInt(document.getElementById("adults").value);
+    const children = parseInt(document.getElementById("children").value);
     const hotel = document.getElementById("hotel").value;
     const meals = document.getElementById("meals").checked;
 
@@ -70,10 +72,10 @@ fieldsToWatch.forEach(Id => {
 });
 
 function updatePricePreview() {
-    const checkIn = document.getElementById("checkIn").value;
-    const checkOut = document.getElementById("checkOut").value;
-    const adults = document.getElementById("adults").value;
-    const children = document.getElementById("children").value;
+    const checkIn = newDate(document.getElementById("checkIn").value);
+    const checkOut = newDate(document.getElementById("checkOut").value);
+    const adults = parseInt(document.getElementById("adults").value);
+    const children = parseInt(document.getElementById("children").value);
     const hotel = document.getElementById("hotel").value;
     const meals = document.getElementById("meals").checked;
 
@@ -89,4 +91,36 @@ function updatePricePreview() {
 
     document.getElementById("pricePreview").innerHTML =
     "<strong>Total Price:</strong> ${totalCost.toFixed(2)} for ${Math.round(hours)} hour(s)";
+}
+
+function loadBookings() {
+  fetch("http://localhost:3000/bookings")
+    .then(res => res.json())
+    .then(data => {
+      const display = document.getElementById("bookingsDisplay");
+      display.innerHTML = "<h3>Booked Trips:</h3>";
+
+      if (data.length === 0) {
+        display.innerHTML += "<p>No bookings yet.</p>";
+        return;
+      }
+
+      data.forEach(booking => {
+        display.innerHTML += `
+          <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            <p><strong>Destination:</strong> ${booking.destination}</p>
+            <p><strong>Hotel:</strong> ${booking.hotel}</p>
+            <p><strong>Adults:</strong> ${booking.adults} | <strong>Children:</strong> ${booking.children}</p>
+            <p><strong>Meals Included:</strong> ${booking.mealsIncluded ? "Yes" : "No"}</p>
+            <p><strong>Check-in:</strong> ${booking.checkIn}</p>
+            <p><strong>Check-out:</strong> ${booking.checkOut}</p>
+            <p><strong>Total Hours:</strong> ${booking.hours}</p>
+            <p><strong>Total Cost:</strong> $${booking.totalCost}</p>
+          </div>
+        `;
+      });
+    })
+    .catch(err => {
+      console.error("Error loading bookings:", err);
+    });
 }
