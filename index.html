@@ -6,7 +6,7 @@
     <title>Project</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<div>
     <h1 >Travel Hotel Bookings</h1>
 <p>Where your travel dreams come true!<br>
     Book a trip now.
@@ -38,9 +38,17 @@ class="input-text"
 <input
 type="text"
 value=""
-placeholder="Enter number of travellers"
+placeholder="Enter number of adult travellers"
 class="input-number"
 min="1"
+/><br>
+
+<input
+type="text"
+value=""
+placeholder="Enter number of chid travellers"
+class="input-number"
+min="0"
 /><br>
 
 
@@ -51,9 +59,26 @@ placeholder="Enter hotel"
 class="input-text"
 /><br>
 
+<label>
+    <input type="checbox" id="meals" placeholder="meals included">Include meals
+</label><br>
+
 <button type="submit">Book Trip</button>
 </form>
 
+<div id="booingForm">
+<p>
+    Adults<br>
+    Price per night(rooms only)=100$<br>
+    prices per night(inclusive of meals)=250$<br>
+    Children <br>
+    Price per night(rooms only)=50$<br>
+    Price per night(inclusive of meals)=120$<br>
+
+</p>
+</div>
+
+<p id="pricePreview"><strong>Total Price:</strong>$0</p>
 
 <div class="country">
     <p>Some of the countries we offer booking to!</p>
@@ -101,6 +126,7 @@ class="input-text"
     </div>
 </div>
 
+<script src="index.js"></script>
 
 </body>
 <footer>
