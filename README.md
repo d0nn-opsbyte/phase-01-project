@@ -1,4 +1,4 @@
-         # Travel Bookings project
+# Travel Bookings project
 
 A simple  web application designed to facilitate hotel bookings.
 
