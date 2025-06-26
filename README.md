@@ -50,7 +50,7 @@ The live site does the following :
 
  ### Backend API
 
- -Repository:[Phase 01 server](git@github.com:d0nn-opsbyte/phase-01-project-server)
+ -Repository:[Phase-01-project-server](git@github.com:d0nn-opsbyte/phase-01-project-server)
 
  -Deployed API:[live API URL](https://phase-01-project-server.onrender.com)
 
@@ -63,5 +63,5 @@ The live site does the following :
  Donald Stephen
 
  phone number:0799944243 
- 
+
  Email@:donaldkiarie768@gmail.com
