@@ -118,6 +118,8 @@ function loadBookings() {
             <p><strong>Check-out:</strong> ${booking.checkOut}</p>
             <p><strong>Total Hours:</strong> ${booking.hours}</p>
             <p><strong>Total Cost:</strong> $${booking.totalCost}</p>
+            <button onclick="editBooking(${booking.id})">Edit</button>
+            <button onclick="deleteBooking(${booking.id})">Delete</button>
           </div>
         `;
       });

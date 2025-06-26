@@ -23,3 +23,8 @@ footer{
     font-weight: bold;   
     margin-bottom: 16px;
 }
+#bookingsDisplay{
+    background-color: aliceblue;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
