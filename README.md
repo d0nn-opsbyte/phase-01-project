@@ -1,15 +1,15 @@
-         #Travel Bookings project
+         # Travel Bookings project
 
 A simple  web application designed to facilitate hotel bookings.
 
-###By Donald Stephen Kiarie
+### By Donald Stephen Kiarie
 
- ##Description
+ ## Description
 
 This is a web application designed to facilitate hotel bookings,allowing users to enter their desired destinations of  travel with additional information such as travel dates  and booking of rooms for both adults and/or children with the option to include meals in the booking .
 
 
-##How to use
+## How to use
 
 -A computer or phone
 -Internet and browser
