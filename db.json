@@ -23,6 +23,18 @@
       "nights": 14,
       "totalCost": 15540,
       "id": "03b5CmM"
+    },
+    {
+      "destination": "spain",
+      "checkIn": "2025-06-27T15:26:00.000Z",
+      "checkOut": "2025-07-12T15:26:00.000Z",
+      "adults": 2,
+      "children": 3,
+      "hotel": "Hotel of Madrid",
+      "mealsIncluded": true,
+      "nights": 15,
+      "totalCost": 12900,
+      "id": "yjdQiad"
     }
   ]
 }

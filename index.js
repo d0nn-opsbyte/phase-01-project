@@ -1,4 +1,17 @@
-window.addEventListener("DOMContentLoaded", loadBookings);
+window.addEventListener("DOMContentLoaded", () =>{
+  loadBookings();
+  setupEventListeners();
+});
+
+function setupEventListeners() {
+  const fieldsToWatch = ["destination","checkIn","checkOut","adults","children","hotel","meals"];
+
+  document.getElementById("bookingForm").addEventListener("submit");
+
+  document.getElementById("meals").addEventListener("change", updatePricePreview);
+
+}
+
 
 document.getElementById("bookingForm").addEventListener("submit", function(e){
     e.preventDefault();
@@ -128,3 +141,4 @@ function loadBookings() {
       console.error("Error loading bookings:", err);
     });
 }
+
