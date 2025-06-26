@@ -14,27 +14,36 @@ Visit the deployed site at: [Travel Hotel Bookings](https://d0nn-opsbyte.github.
 
 The live site does the following :
 
- -Select a country which you wnt to travel to.
+ -Select a country which you want to travel to.
+
  -Book successfull trips.
- -Enter the number of adult andchildren travellers.
+
+ -Enter the number of adult and children travellers.
+
  -Book a check in date and a check out date.
+
  -Book a specific hotel.
 
 ## How to use
 
 -A computer or phone
+
 -Internet and browser
 
 ## Development
 
  -Fork and clone this repo to your computer
+
  -install all dependencies
+
  -open it and run it in the browser
 
  ## Technology used
 
  -JavaScript
+
  -CSS
+
  -HTML
 
  ## Related Repositories
@@ -42,6 +51,7 @@ The live site does the following :
  ### Backend API
 
  -Repository:[Phase 01 server](git@github.com:d0nn-opsbyte/phase-01-project-server)
+
  -Deployed API:[live API URL](https://phase-01-project-server.onrender.com)
 
  ## Contributions
@@ -51,5 +61,7 @@ The live site does the following :
 ## Contacts
 
  Donald Stephen
+
  phone number:0799944243 
+ 
  Email@:donaldkiarie768@gmail.com
