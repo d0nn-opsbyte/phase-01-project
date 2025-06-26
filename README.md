@@ -25,7 +25,7 @@ The live site does the following :
 -A computer or phone
 -Internet and browser
 
-##Development
+## Development
 
  -Fork and clone this repo to your computer
  -install all dependencies
