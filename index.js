@@ -1,25 +1,25 @@
 window.addEventListener("DOMContentLoaded", loadBookings);
 
-document.getElementById("booingForm").addEventListener("submit", function(e){
+document.getElementById("bookingForm").addEventListener("submit", function(e){
     e.preventDefault();
     const destination = document.getElementById("destination").value;
-    const checkIn = newDate(document.getElementById("checkIn").value);
-    const checkOut = newDate(document.getElementById("checkOut").value);
+    const checkIn = new Date(document.getElementById("checkIn").value);
+    const checkOut = new Date(document.getElementById("checkOut").value);
     const adults = parseInt(document.getElementById("adults").value);
     const children = parseInt(document.getElementById("children").value);
     const hotel = document.getElementById("hotel").value;
     const meals = document.getElementById("meals").checked;
 
-    const nights = (checkOut-checkIn) / (1000*60*60);
-    if (hours<= 0) {
+    const nights = (checkOut-checkIn) / (1000*60*60*24);
+    if (nights <= 0) {
         alert("please enter valid check-in and checkn-out time");
         return;
     }
 
-    const adultRate = meals ? (250/24) : (100/24);
-    const childRate = meals ? (120/24) : (50/24);
+    const adultRate = meals ? 250 : 100;
+    const childRate = meals ? 120 : 50;
 
-    const totalCost = hours * ((adults * adultRate) + (children * childRate));
+    const totalCost = nights * ((adults * adultRate) + (children * childRate));
 
     const booking = {
         destination,
@@ -29,7 +29,7 @@ document.getElementById("booingForm").addEventListener("submit", function(e){
         children,
         hotel,
         mealsIncluded: meals,
-        hours: Math.round(hours),
+        nights: Math.round(nights),
         totalCost: Math.round(totalCost)
     };
 
@@ -40,7 +40,7 @@ document.getElementById("booingForm").addEventListener("submit", function(e){
     })
     .then(res => res.json())
     .then(data => {
-        alert("Trip booed successfully!\nHours: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}");
+        alert("Trip booked successfully!\nNights: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}");
         document.getElementById("bookingForm").reset();
         updatePricePreview();
     })
@@ -51,13 +51,13 @@ document.getElementById("booingForm").addEventListener("submit", function(e){
 
 document.getElementById("meals").addEventListener("change", function(e){
     if (e.target.checked) {
-        comsole.log("Meals included");
+        console.log("Meals included");
     } else{
         console.log("Meals not included");
     }
 });
 
-document.getElementById("child").addEventListener("input", function(e) {
+document.getElementById("children").addEventListener("input", function(e) {
     const value = parseInt(e.target.value);
     if(value < 0){
         alert("enter a valid number.");
@@ -65,28 +65,30 @@ document.getElementById("child").addEventListener("input", function(e) {
     }
 });
 
-const fieldsToWatch = ["checkIn","checkOut","adults","child","meals"];
-fieldsToWatch.forEach(Id => {
-    document.getElementById(id).addEventListener("input", updatePricePreview);
-    document.getElementById(id).addEventListener("change", updatePricePreview);
+  fieldsToWatch.forEach(Id => {
+     const element =document.getElementById(id);
+     if(element) {
+        element.addEventListener("input", updatePricePreview);
+        element.addEventListener("change", updatePricePreview)
+     }
 });
 
 function updatePricePreview() {
-    const checkIn = newDate(document.getElementById("checkIn").value);
-    const checkOut = newDate(document.getElementById("checkOut").value);
+    const checkIn = new Date(document.getElementById("checkIn").value);
+    const checkOut = new Date(document.getElementById("checkOut").value);
     const adults = parseInt(document.getElementById("adults").value);
     const children = parseInt(document.getElementById("children").value);
     const hotel = document.getElementById("hotel").value;
     const meals = document.getElementById("meals").checked;
 
-    const hours = (checkOut-checkIn) / (1000*60*60);
-    if (hours <= 0){
-        document.getElementById("pricePreview").innerHTML = "<strong>Total Price:</strong> $0";
+    const nights = (checkOut-checkIn) / (1000*60*60*24);
+    if (nights <= 0){
+        document.getElementById("pricePreview").innerHTML = "<strong>Total Price:</strong> $${totalCost.toFixed(2)} for ${Math.round(nights)} nigts(s)";
         return;
     }
 
-    const adultRate = meals ? (250/24) : (100/24);
-    const childRate = meals ? (120/24) : (50/24);
+    const adultRate = meals ? 250 : 100;
+    const childRate = meals ? 120 : 50;
     const totalCost = hours * ((adults * adultRate) + (children * childRate));
 
     document.getElementById("pricePreview").innerHTML =
@@ -107,7 +109,7 @@ function loadBookings() {
 
       data.forEach(booking => {
         display.innerHTML += `
-          <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+          <div>
             <p><strong>Destination:</strong> ${booking.destination}</p>
             <p><strong>Hotel:</strong> ${booking.hotel}</p>
             <p><strong>Adults:</strong> ${booking.adults} | <strong>Children:</strong> ${booking.children}</p>

@@ -1,3 +1,28 @@
 {
-    "bookings": []
+  "bookings": [
+    {
+      "id": "1",
+      "destination": "Germany",
+      "checkIn": "2025-06-27T09:17:00Z",
+      "checkOut": "2025-07-12T10:00:00Z",
+      "NUmberOfAduts": "2",
+      "numberOfCHildren": "3",
+      "nameOfHotel": "Hotel of Munich",
+      "includeMeals": true,
+      "nights": 15,
+      "totalCost": 34500
+    },
+    {
+      "destination": "Kenya",
+      "checkIn": "2025-06-27T07:07:00.000Z",
+      "checkOut": "2025-07-11T07:07:00.000Z",
+      "adults": 3,
+      "children": 3,
+      "hotel": "Sarova ",
+      "mealsIncluded": true,
+      "nights": 14,
+      "totalCost": 15540,
+      "id": "03b5CmM"
+    }
+  ]
 }
