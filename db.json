@@ -47,6 +47,18 @@
       "nights": 10,
       "totalCost": 4900,
       "id": "2HRpQXv"
+    },
+    {
+      "destination": "japan",
+      "checkIn": "2025-07-01T13:05:00.000Z",
+      "checkOut": "2025-07-11T13:06:00.000Z",
+      "adults": 1,
+      "children": 2,
+      "hotel": "tokyo hotel",
+      "mealsIncluded": true,
+      "nights": 10,
+      "totalCost": 4900,
+      "id": "Sy-u3yp"
     }
   ]
 }

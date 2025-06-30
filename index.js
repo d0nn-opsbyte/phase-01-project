@@ -48,7 +48,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
         totalCost: Math.round(totalCost)
     };
 
-    fetch("http://localhost:3000/bookings", {
+    fetch("https://phase-01-project-server.onrender.com", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(booking)
@@ -111,7 +111,7 @@ function updatePricePreview() {
 }
 
 function loadBookings() {
-  fetch("http://localhost:3000/bookings")
+  fetch("https://phase-01-project-server.onrender.com")
     .then(res => res.json())
     .then(data => {
       const display = document.getElementById("bookingsDisplay");
