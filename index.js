@@ -1,4 +1,4 @@
- const baseURL = ("https://phase-01-project-server.onrender.com")
+ const baseURL = "https://phase-01-project-server.onrender.com";
 
 window.addEventListener("DOMContentLoaded", () =>{
   loadBookings();
@@ -7,9 +7,16 @@ window.addEventListener("DOMContentLoaded", () =>{
 
 function setupEventListeners() {
   const fieldsToWatch = ["destination","checkIn","checkOut","adults","children","hotel","meals"];
-  document.getElementById("bookingForm").addEventListener("submit");
 
-  document.getElementById("meals").addEventListener("change", updatePricePreview);
+  document.getElementById("bookingForm").addEventListener("submit", handleFormSubmit);
+
+  fieldsToWatch.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("input", updatePricePreview);
+      element.addEventListener("change", updatePricePreview);
+    }
+  });
 
 }
 
@@ -47,16 +54,17 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
         totalCost: Math.round(totalCost)
     };
 
-    fetch("${baseURL}"/bookings, {
+    fetch(`${baseURL}/booking`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(booking)
+        body: JSON.stringify(booking),
     })
     .then(res => res.json())
     .then(data => {
         alert("Trip booked successfully!\nNights: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}");
         document.getElementById("bookingForm").reset();
         updatePricePreview();
+        loadBookings();
     })
     .catch(error => {
         console.error("booking failed");
@@ -110,7 +118,7 @@ function updatePricePreview() {
 }
 
 function loadBookings() {
-  fetch("${baseURL}"/bookings)
+  fetch(`${baseURL}/booking`)
     .then(res => res.json())
     .then(data => {
       const display = document.getElementById("bookingsDisplay");
