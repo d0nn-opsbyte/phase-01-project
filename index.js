@@ -1,4 +1,4 @@
- const baseURL = "https://phase-01-project-server.onrender.com";
+const baseURL = "https://phase-01-project-server-1.onrender.com";
 
 window.addEventListener("DOMContentLoaded", () =>{
   loadBookings();
