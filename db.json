@@ -35,6 +35,18 @@
       "nights": 15,
       "totalCost": 12900,
       "id": "yjdQiad"
+    },
+    {
+      "destination": "USA",
+      "checkIn": "2025-07-02T10:07:00.000Z",
+      "checkOut": "2025-07-12T10:07:00.000Z",
+      "adults": 1,
+      "children": 2,
+      "hotel": "hotel",
+      "mealsIncluded": true,
+      "nights": 10,
+      "totalCost": 4900,
+      "id": "2HRpQXv"
     }
   ]
 }
