@@ -60,7 +60,7 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
     })
     .then(res => res.json())
     .then(data => {
-        alert(`Trip booked successfully!\nNights: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}`);
+        alert(`Trip booked successfully!\nNights: ${Math.round(booking.nights)}\nTotal Cost: $${booking.totalCost.toFixed(2)}`);
         document.getElementById("bookingForm").reset();
         updatePricePreview();
         loadBookings();
@@ -80,31 +80,23 @@ document.getElementById("meals").addEventListener("change", function(e){
 
 document.getElementById("children").addEventListener("input", function(e) {
     const value = parseInt(e.target.value);
-    if(value < 0){
+    if (value < 0) {
         alert("enter a valid number.");
-        e.target.value = ""
+        e.target.value = "";
     }
-});
-
-  fieldsToWatch.forEach(Id => {
-     const element =document.getElementById(id);
-     if(element) {
-        element.addEventListener("input", updatePricePreview);
-        element.addEventListener("change", updatePricePreview)
-     }
 });
 
 function updatePricePreview() {
     const checkIn = new Date(document.getElementById("checkIn").value);
     const checkOut = new Date(document.getElementById("checkOut").value);
-    const adults = parseInt(document.getElementById("adults").value);
-    const children = parseInt(document.getElementById("children").value);
+    const adults = parseInt(document.getElementById("adults").value) || 0;
+    const children = parseInt(document.getElementById("children").value) || 0;
     const hotel = document.getElementById("hotel").value;
     const meals = document.getElementById("meals").checked;
 
-    const nights = (checkOut-checkIn) / (1000*60*60*24);
-    if (nights <= 0){
-        document.getElementById("pricePreview").innerHTML = "<strong>Total Price:</strong> $${totalCost.toFixed(2)} for ${Math.round(nights)} nigts(s)";
+    const nights = (checkOut - checkIn) / (1000 * 60 * 60 * 24);
+    if (isNaN(nights) || nights <= 0) {
+        document.getElementById("pricePreview").innerHTML = "<strong>Total Price:</strong> $0.00 for 0 night(s)";
         return;
     }
 
@@ -113,41 +105,41 @@ function updatePricePreview() {
     const totalCost = nights * ((adults * adultRate) + (children * childRate));
 
     document.getElementById("pricePreview").innerHTML =
-    "<strong>Total Price:</strong> ${totalCost.toFixed(2)} for ${Math.round(hours)} hour(s)";
+        `<strong>Total Price:</strong> $${totalCost.toFixed(2)} for ${Math.round(nights)} night(s)`;
 }
+
 
 function loadBookings() {
-  fetch(`${baseURL}/bookings`)
-    .then(res => res.json())
-    .then(data => {
-      const display = document.getElementById("bookingsDisplay");
-      display.innerHTML = "<h3>Booked Trips:</h3>";
+    fetch(`${baseURL}/bookings`)
+        .then(res => res.json())
+        .then(data => {
+            const display = document.getElementById("bookingsDisplay");
+            display.innerHTML = "<h3>Booked Trips:</h3>";
 
-      if (data.length === 0) {
-        display.innerHTML += "<p>No bookings yet.</p>";
-        return;
-      }
+            if (data.length === 0) {
+                display.innerHTML += "<p>No bookings yet.</p>";
+                return;
+            }
 
-      data.forEach(booking => {
-        display.innerHTML += `
-          <div>
-            <p><strong>Destination:</strong> ${booking.destination}</p>
-            <p><strong>Hotel:</strong> ${booking.hotel}</p>
-            <p><strong>Adults:</strong> ${booking.adults} | <strong>Children:</strong> ${booking.children}</p>
-            <p><strong>Meals Included:</strong> ${booking.mealsIncluded ? "Yes" : "No"}</p>
-            <p><strong>Check-in:</strong> ${booking.checkIn}</p>
-            <p><strong>Check-out:</strong> ${booking.checkOut}</p>
-            <p><strong>Total Hours:</strong> ${booking.hours}</p>
-            <p><strong>Total Cost:</strong> $${booking.totalCost}</p>
-            <button onclick="editBooking(${booking.id})">Edit</button>
-            <button onclick="deleteBooking(${booking.id})">Delete</button>
-          </div>
-        `;
-      });
-    })
-    .catch(err => {
-      console.error("Error loading bookings:", err);
-    });
+            data.forEach(booking => {
+                display.innerHTML += `
+                  <div>
+                    <p><strong>Destination:</strong> ${booking.destination}</p>
+                    <p><strong>Hotel:</strong> ${booking.hotel}</p>
+                    <p><strong>Adults:</strong> ${booking.adults} | <strong>Children:</strong> ${booking.children}</p>
+                    <p><strong>Meals Included:</strong> ${booking.mealsIncluded ? "Yes" : "No"}</p>
+                    <p><strong>Check-in:</strong> ${booking.checkIn}</p>
+                    <p><strong>Check-out:</strong> ${booking.checkOut}</p>
+                    <p><strong>Total Nights:</strong> ${booking.nights}</p>
+                    <p><strong>Total Cost:</strong> $${booking.totalCost}</p>
+                    <button onclick="editBooking(${booking.id})">Edit</button>
+                    <button onclick="deleteBooking(${booking.id})">Delete</button>
+                  </div>
+                `;
+            });
+        })
+        .catch(error => {
+            console.error("Failed to load bookings", error);
+        });
 }
-
 
