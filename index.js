@@ -1,4 +1,4 @@
-const baseURL = "https://phase-01-project-server-1.onrender.com";
+const baseURL = "https://phase-01-project-server.onrender.com";
 
 window.addEventListener("DOMContentLoaded", () =>{
   loadBookings();
@@ -8,7 +8,6 @@ window.addEventListener("DOMContentLoaded", () =>{
 function setupEventListeners() {
   const fieldsToWatch = ["destination","checkIn","checkOut","adults","children","hotel","meals"];
 
-  document.getElementById("bookingForm").addEventListener("submit", handleFormSubmit);
 
   fieldsToWatch.forEach(id => {
     const element = document.getElementById(id);
@@ -54,14 +53,14 @@ document.getElementById("bookingForm").addEventListener("submit", function(e){
         totalCost: Math.round(totalCost)
     };
 
-    fetch(`${baseURL}/booking`, {
+    fetch(`${baseURL}/bookings`, {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(booking),
     })
     .then(res => res.json())
     .then(data => {
-        alert("Trip booked successfully!\nNights: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}");
+        alert(`Trip booked successfully!\nNights: ${Math.round(hours)}\nTotal Cost: ${totalCost.toFixed(2)}`);
         document.getElementById("bookingForm").reset();
         updatePricePreview();
         loadBookings();
@@ -111,14 +110,14 @@ function updatePricePreview() {
 
     const adultRate = meals ? 250 : 100;
     const childRate = meals ? 120 : 50;
-    const totalCost = hours * ((adults * adultRate) + (children * childRate));
+    const totalCost = nights * ((adults * adultRate) + (children * childRate));
 
     document.getElementById("pricePreview").innerHTML =
     "<strong>Total Price:</strong> ${totalCost.toFixed(2)} for ${Math.round(hours)} hour(s)";
 }
 
 function loadBookings() {
-  fetch(`${baseURL}/booking`)
+  fetch(`${baseURL}/bookings`)
     .then(res => res.json())
     .then(data => {
       const display = document.getElementById("bookingsDisplay");
